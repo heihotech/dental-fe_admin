@@ -1,0 +1,50 @@
+{
+  "Footer": {
+    "description": "Auto imported from components/Footer.vue"
+  },
+  "HorizontalTopbar": {
+    "description": "Auto imported from components/Horizontal-topbar.vue"
+  },
+  "Loading": {
+    "description": "Auto imported from components/Loading.vue"
+  },
+  "Logo": {
+    "description": "Auto imported from components/Logo.vue"
+  },
+  "PageHeader": {
+    "description": "Auto imported from components/Page-header.vue"
+  },
+  "RightSidebar": {
+    "description": "Auto imported from components/Right-sidebar.vue"
+  },
+  "Sidebar": {
+    "description": "Auto imported from components/Sidebar.vue"
+  },
+  "Topbar": {
+    "description": "Auto imported from components/Topbar.vue"
+  },
+  "HorizontalMenu": {
+    "description": "Auto imported from components/horizontal-menu.js"
+  },
+  "Menu": {
+    "description": "Auto imported from components/menu.js"
+  },
+  "WidgetsActivity": {
+    "description": "Auto imported from components/widgets/Activity.vue"
+  },
+  "WidgetsSalesAnalytics": {
+    "description": "Auto imported from components/widgets/Sales-analytics.vue"
+  },
+  "WidgetsSellingProduct": {
+    "description": "Auto imported from components/widgets/Selling-product.vue"
+  },
+  "WidgetsSocialSource": {
+    "description": "Auto imported from components/widgets/Social-source.vue"
+  },
+  "WidgetsStat": {
+    "description": "Auto imported from components/widgets/Stat.vue"
+  },
+  "WidgetsTopUsers": {
+    "description": "Auto imported from components/widgets/Top-users.vue"
+  }
+}
