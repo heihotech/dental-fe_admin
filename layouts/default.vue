@@ -11,6 +11,7 @@ export default {
   },
   computed: mapState(["layout"]),
   mounted() {
+    // document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
     document.body.classList.remove("authentication-bg");
   },
 };
@@ -31,7 +32,7 @@ export default {
       v-if="layout.layoutType === 'horizontal'"
       :layout="layout.layoutType"
     >
-      <slot />
+      <Nuxt />
     </Horizontal>
   </div>
 </template>

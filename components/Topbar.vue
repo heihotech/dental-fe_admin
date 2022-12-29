@@ -93,16 +93,13 @@ export default {
       this.text = country;
       this.flag = flag;
     },
-    logoutUser() {
-      if (process.env.auth === "firebase") {
-        this.$store.dispatch("auth/logOut");
-      } else if (process.env.auth === "fakebackend") {
-        this.$store.dispatch("authfack/logout");
-      }
-      this.$router.push({
-        path: "/account/login",
-      });
-    },
+    // logoutUser() {
+    //   this.$store.dispatch("auth/logOut");
+
+    //   this.$router.push({
+    //     path: "/auth/signin",
+    //   });
+    // },
   },
 };
 </script>

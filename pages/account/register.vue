@@ -8,7 +8,7 @@ export default {
   layout: "auth",
   head() {
     return {
-      title: `${this.title} | Nuxtjs Responsive Bootstrap 5 Admin Dashboard`,
+      title: `Register | Nuxtjs Responsive Bootstrap 5 Admin Dashboard`,
     };
   },
   data() {
@@ -73,11 +73,9 @@ export default {
                 this.isRegisterError = false;
                 this.registerSuccess = true;
                 if (this.registerSuccess) {
-                  this.$router.push(
-                    this.$route.query.redirectFrom || {
-                      path: "/",
-                    }
-                  );
+                  this.$router.push({
+                    path: "/",
+                  });
                 }
               })
               .catch((error) => {
@@ -274,7 +272,7 @@ export default {
                       <p class="text-muted mb-0">
                         Already have an account ?
                         <nuxt-link
-                          to="/account/login"
+                          to="/auth/signin"
                           class="fw-medium text-primary"
                           >Login</nuxt-link
                         >

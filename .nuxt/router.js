@@ -10,13 +10,19 @@ const _62a8742b = () => interopDefault(import('../pages/recapitulations.vue' /* 
 const _01483e4b = () => interopDefault(import('../pages/reservations.vue' /* webpackChunkName: "pages/reservations" */))
 const _6e80c6af = () => interopDefault(import('../pages/account/forgot-password.vue' /* webpackChunkName: "pages/account/forgot-password" */))
 const _3e476093 = () => interopDefault(import('../pages/account/login.vue' /* webpackChunkName: "pages/account/login" */))
+const _8a5ccad4 = () => interopDefault(import('../pages/account/profile/index.vue' /* webpackChunkName: "pages/account/profile/index" */))
 const _32908b69 = () => interopDefault(import('../pages/account/register.vue' /* webpackChunkName: "pages/account/register" */))
+const _38b8f145 = () => interopDefault(import('../pages/auth/forgot-password/index.vue' /* webpackChunkName: "pages/auth/forgot-password/index" */))
 const _4cbb60ea = () => interopDefault(import('../pages/auth/lock-screen.vue' /* webpackChunkName: "pages/auth/lock-screen" */))
 const _ab3ffbec = () => interopDefault(import('../pages/auth/login-1.vue' /* webpackChunkName: "pages/auth/login-1" */))
 const _28b0ec2c = () => interopDefault(import('../pages/auth/recoverpwd.vue' /* webpackChunkName: "pages/auth/recoverpwd" */))
 const _3f89615a = () => interopDefault(import('../pages/auth/register-1.vue' /* webpackChunkName: "pages/auth/register-1" */))
+const _33f3a438 = () => interopDefault(import('../pages/auth/signin/index.vue' /* webpackChunkName: "pages/auth/signin/index" */))
+const _8bde6ba4 = () => interopDefault(import('../pages/auth/signup/index.vue' /* webpackChunkName: "pages/auth/signup/index" */))
+const _3821df31 = () => interopDefault(import('../pages/auth/verification/index.vue' /* webpackChunkName: "pages/auth/verification/index" */))
 const _0d56a0be = () => interopDefault(import('../pages/utility/404.vue' /* webpackChunkName: "pages/utility/404" */))
 const _36d336de = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _2563ddd0 = () => interopDefault(import('~/pages/index.vue' /* webpackChunkName: "" */))
 
 const emptyFn = () => {}
 
@@ -26,7 +32,7 @@ export const routerOptions = {
   mode: 'history',
   base: '/',
   linkActiveClass: 'nuxt-link-active',
-  linkExactActiveClass: 'nuxt-link-exact-active',
+  linkExactActiveClass: 'active',
   scrollBehavior,
 
   routes: [{
@@ -54,9 +60,17 @@ export const routerOptions = {
     component: _3e476093,
     name: "account-login"
   }, {
+    path: "/account/profile",
+    component: _8a5ccad4,
+    name: "account-profile"
+  }, {
     path: "/account/register",
     component: _32908b69,
     name: "account-register"
+  }, {
+    path: "/auth/forgot-password",
+    component: _38b8f145,
+    name: "auth-forgot-password"
   }, {
     path: "/auth/lock-screen",
     component: _4cbb60ea,
@@ -74,6 +88,18 @@ export const routerOptions = {
     component: _3f89615a,
     name: "auth-register-1"
   }, {
+    path: "/auth/signin",
+    component: _33f3a438,
+    name: "auth-signin"
+  }, {
+    path: "/auth/signup",
+    component: _8bde6ba4,
+    name: "auth-signup"
+  }, {
+    path: "/auth/verification",
+    component: _3821df31,
+    name: "auth-verification"
+  }, {
     path: "/utility/404",
     component: _0d56a0be,
     name: "utility-404"
@@ -81,6 +107,9 @@ export const routerOptions = {
     path: "/",
     component: _36d336de,
     name: "index"
+  }, {
+    path: "/",
+    component: _2563ddd0
   }],
 
   fallback: false

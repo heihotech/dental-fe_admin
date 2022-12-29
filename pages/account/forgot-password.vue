@@ -8,7 +8,7 @@ export default {
   layout: "auth",
   head() {
     return {
-      title: `${this.title} | Nuxtjs Responsive Bootstrap 5 Admin Dashboard`,
+      title: `Forgot Password | Nuxtjs Responsive Bootstrap 5 Admin Dashboard`,
     };
   },
   data() {

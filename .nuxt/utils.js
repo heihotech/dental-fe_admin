@@ -200,7 +200,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
-      env: {"auth":"fakebackend","apikey":"","authdomain":"","databaseurl":"","projectid":"","storgebucket":"","message":"","appid":"","measurement":""}
+      env: {"auth":"","apikey":"","authdomain":"","databaseurl":"","projectid":"","storgebucket":"","message":"","appid":"","measurement":"","VUE_APP_DEFAULT_AUTH":"","VUE_APP_APIKEY":"","VUE_APP_AUTHDOMAIN":"","VUE_APP_DATABASEURL":"","VUE_APP_PROJECTId":"","VUE_APP_STORAGEBUCKET":"","VUE_APP_MESSAGINGSENDERID":"","VUE_APP_APPId":"","VUE_APP_MEASUREMENTID":"","API_URL":"http://localhost:8085","API_TOKEN":"123","PATIENT_RADMISSION_DAY_LIMIT":"7","DATA_SETTIMEOUT_LIMIT_MS":"1000","DEBOUNCE_SETTIMEOUT_LIMIT_MS":"500"}
     }
     // Only set once
 

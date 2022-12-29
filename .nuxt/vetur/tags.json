@@ -29,22 +29,22 @@
   "Menu": {
     "description": "Auto imported from components/menu.js"
   },
-  "WidgetsActivity": {
+  "Activity": {
     "description": "Auto imported from components/widgets/Activity.vue"
   },
-  "WidgetsSalesAnalytics": {
+  "SalesAnalytics": {
     "description": "Auto imported from components/widgets/Sales-analytics.vue"
   },
-  "WidgetsSellingProduct": {
+  "SellingProduct": {
     "description": "Auto imported from components/widgets/Selling-product.vue"
   },
-  "WidgetsSocialSource": {
+  "SocialSource": {
     "description": "Auto imported from components/widgets/Social-source.vue"
   },
-  "WidgetsStat": {
+  "Stat": {
     "description": "Auto imported from components/widgets/Stat.vue"
   },
-  "WidgetsTopUsers": {
+  "TopUsers": {
     "description": "Auto imported from components/widgets/Top-users.vue"
   }
 }

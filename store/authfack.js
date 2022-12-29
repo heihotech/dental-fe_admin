@@ -6,7 +6,7 @@ export const state = () => {
   return user
     ? { status: { loggeduser: true }, user }
     : { status: {}, user: null };
-}
+};
 
 export const actions = {
   // Logs in the user.
@@ -15,11 +15,11 @@ export const actions = {
     commit("loginRequest", { email });
 
     userService.login(email, password).then(
-      user => {
+      (user) => {
         commit("loginSuccess", user);
         this.$router.push({ path: "/" });
       },
-      error => {
+      (error) => {
         commit("loginFailure", error);
         dispatch("modules/notification/error", error, { root: true });
       }
@@ -34,19 +34,19 @@ export const actions = {
   registeruser({ dispatch, commit }, user) {
     commit("registerRequest", user);
     userService.register(user).then(
-      user => {
+      (user) => {
         commit("registerSuccess", user);
         dispatch("modules/notification/success", "Registration successful", {
-          root: true
+          root: true,
         });
-        this.$router.push({ path: "/account/login" });
+        this.$router.push({ path: "/auth/signin" });
       },
-      error => {
+      (error) => {
         commit("registerFailure", error);
         dispatch("modules/notification/error", error, { root: true });
       }
     );
-  }
+  },
 };
 
 export const mutations = {
@@ -74,5 +74,5 @@ export const mutations = {
   },
   registerFailure(state) {
     state.status = {};
-  }
+  },
 };

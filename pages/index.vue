@@ -14,6 +14,11 @@ export default {
       items: [],
     };
   },
+  computed: {
+    isLoggedIn() {
+      return this.$auth.loggedIn;
+    },
+  },
   middleware: "authentication",
 };
 </script>

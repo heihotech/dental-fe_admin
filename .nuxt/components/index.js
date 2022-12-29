@@ -8,12 +8,12 @@ export { default as Sidebar } from '../../components/Sidebar.vue'
 export { default as Topbar } from '../../components/Topbar.vue'
 export { default as HorizontalMenu } from '../../components/horizontal-menu.js'
 export { default as Menu } from '../../components/menu.js'
-export { default as WidgetsActivity } from '../../components/widgets/Activity.vue'
-export { default as WidgetsSalesAnalytics } from '../../components/widgets/Sales-analytics.vue'
-export { default as WidgetsSellingProduct } from '../../components/widgets/Selling-product.vue'
-export { default as WidgetsSocialSource } from '../../components/widgets/Social-source.vue'
-export { default as WidgetsStat } from '../../components/widgets/Stat.vue'
-export { default as WidgetsTopUsers } from '../../components/widgets/Top-users.vue'
+export { default as Activity } from '../../components/widgets/Activity.vue'
+export { default as SalesAnalytics } from '../../components/widgets/Sales-analytics.vue'
+export { default as SellingProduct } from '../../components/widgets/Selling-product.vue'
+export { default as SocialSource } from '../../components/widgets/Social-source.vue'
+export { default as Stat } from '../../components/widgets/Stat.vue'
+export { default as TopUsers } from '../../components/widgets/Top-users.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {
