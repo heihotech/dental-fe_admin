@@ -8,12 +8,18 @@ export { default as Sidebar } from '../../components/Sidebar.vue'
 export { default as Topbar } from '../../components/Topbar.vue'
 export { default as HorizontalMenu } from '../../components/horizontal-menu.js'
 export { default as Menu } from '../../components/menu.js'
+export { default as PatientTable } from '../../components/tables/patient-table.vue'
 export { default as Activity } from '../../components/widgets/Activity.vue'
 export { default as SalesAnalytics } from '../../components/widgets/Sales-analytics.vue'
 export { default as SellingProduct } from '../../components/widgets/Selling-product.vue'
 export { default as SocialSource } from '../../components/widgets/Social-source.vue'
 export { default as Stat } from '../../components/widgets/Stat.vue'
 export { default as TopUsers } from '../../components/widgets/Top-users.vue'
+export { default as CreatePatientsModal } from '../../components/modals/patients/Create-patients-modal.vue'
+export { default as DeletePatientsModal } from '../../components/modals/patients/Delete-patients-modal.vue'
+export { default as DetailPatientsModal } from '../../components/modals/patients/Detail-patients-modal.vue'
+export { default as EditPatientsModal } from '../../components/modals/patients/Edit-patients-modal.vue'
+export { default as RestorePatientsModal } from '../../components/modals/patients/Restore-patients-modal.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

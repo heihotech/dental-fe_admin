@@ -66,6 +66,7 @@ export default {
     "~/plugins/vue-chartist.js",
     "~/plugins/vue-mask.js",
     "~/plugins/vue-googlemap.js",
+    // "~/plugins/multiselect.js",
     // "~/plugins/queue-voice.js",
     "~/plugins/api-token-request.js",
     "~/plugins/typing.js",

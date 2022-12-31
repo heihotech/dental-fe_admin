@@ -29,6 +29,9 @@
   "Menu": {
     "description": "Auto imported from components/menu.js"
   },
+  "PatientTable": {
+    "description": "Auto imported from components/tables/patient-table.vue"
+  },
   "Activity": {
     "description": "Auto imported from components/widgets/Activity.vue"
   },
@@ -46,5 +49,20 @@
   },
   "TopUsers": {
     "description": "Auto imported from components/widgets/Top-users.vue"
+  },
+  "CreatePatientsModal": {
+    "description": "Auto imported from components/modals/patients/Create-patients-modal.vue"
+  },
+  "DeletePatientsModal": {
+    "description": "Auto imported from components/modals/patients/Delete-patients-modal.vue"
+  },
+  "DetailPatientsModal": {
+    "description": "Auto imported from components/modals/patients/Detail-patients-modal.vue"
+  },
+  "EditPatientsModal": {
+    "description": "Auto imported from components/modals/patients/Edit-patients-modal.vue"
+  },
+  "RestorePatientsModal": {
+    "description": "Auto imported from components/modals/patients/Restore-patients-modal.vue"
   }
 }

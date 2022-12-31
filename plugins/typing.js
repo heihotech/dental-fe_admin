@@ -72,6 +72,13 @@ export default ({ app }, inject) => {
     }
     return "-";
   });
+  inject("calculateAge", (val) => {
+    val = new Date(val);
+    let diff_ms = Date.now() - val.getTime();
+    let age_dt = new Date(diff_ms);
+
+    return Math.abs(age_dt.getUTCFullYear() - 1970);
+  });
   const mergeObject = (targetObject, sourceObject) => {
     const copyTargetObject = targetObject;
     const copySourceObject = sourceObject;
