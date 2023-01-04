@@ -5,7 +5,6 @@ import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
 const _5728c350 = () => interopDefault(import('../pages/bills.vue' /* webpackChunkName: "pages/bills" */))
-const _5f1f5c96 = () => interopDefault(import('../pages/patients/index.vue' /* webpackChunkName: "pages/patients/index" */))
 const _62a8742b = () => interopDefault(import('../pages/recapitulations.vue' /* webpackChunkName: "pages/recapitulations" */))
 const _01483e4b = () => interopDefault(import('../pages/reservations.vue' /* webpackChunkName: "pages/reservations" */))
 const _6e80c6af = () => interopDefault(import('../pages/account/forgot-password.vue' /* webpackChunkName: "pages/account/forgot-password" */))
@@ -20,6 +19,8 @@ const _3f89615a = () => interopDefault(import('../pages/auth/register-1.vue' /* 
 const _33f3a438 = () => interopDefault(import('../pages/auth/signin/index.vue' /* webpackChunkName: "pages/auth/signin/index" */))
 const _8bde6ba4 = () => interopDefault(import('../pages/auth/signup/index.vue' /* webpackChunkName: "pages/auth/signup/index" */))
 const _3821df31 = () => interopDefault(import('../pages/auth/verification/index.vue' /* webpackChunkName: "pages/auth/verification/index" */))
+const _fcc9ace2 = () => interopDefault(import('../pages/management/doctors/index.vue' /* webpackChunkName: "pages/management/doctors/index" */))
+const _24c58b69 = () => interopDefault(import('../pages/management/patients/index.vue' /* webpackChunkName: "pages/management/patients/index" */))
 const _0d56a0be = () => interopDefault(import('../pages/utility/404.vue' /* webpackChunkName: "pages/utility/404" */))
 const _36d336de = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 const _2563ddd0 = () => interopDefault(import('~/pages/index.vue' /* webpackChunkName: "" */))
@@ -39,10 +40,6 @@ export const routerOptions = {
     path: "/bills",
     component: _5728c350,
     name: "bills"
-  }, {
-    path: "/patients",
-    component: _5f1f5c96,
-    name: "patients"
   }, {
     path: "/recapitulations",
     component: _62a8742b,
@@ -100,6 +97,14 @@ export const routerOptions = {
     component: _3821df31,
     name: "auth-verification"
   }, {
+    path: "/management/doctors",
+    component: _fcc9ace2,
+    name: "management-doctors"
+  }, {
+    path: "/management/patients",
+    component: _24c58b69,
+    name: "management-patients"
+  }, {
     path: "/utility/404",
     component: _0d56a0be,
     name: "utility-404"
@@ -107,6 +112,9 @@ export const routerOptions = {
     path: "/",
     component: _36d336de,
     name: "index"
+  }, {
+    path: "/",
+    component: _2563ddd0
   }, {
     path: "/",
     component: _2563ddd0

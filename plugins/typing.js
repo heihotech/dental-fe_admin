@@ -230,6 +230,16 @@ export default ({ app }, inject) => {
       return process.env.API_URL;
     }
   });
+  inject("parsingDateTime", (val) => {
+    const date = new Date(val);
+
+    // Get year, month, and day part from the date
+    const year = date.toLocaleString("default", { year: "numeric" });
+    const month = date.toLocaleString("default", { month: "2-digit" });
+    const day = date.toLocaleString("default", { day: "2-digit" });
+
+    return `${day}-${month}-${year}`;
+  });
   inject("parsingAgeObject", (obj) => {
     if (typeof obj !== "object") {
       return "-";

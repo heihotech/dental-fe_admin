@@ -3,112 +3,143 @@
     "name": "bills",
     "path": "/bills",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/bills.vue",
-    "chunkName": "pages/bills"
-  },
-  {
-    "name": "patients",
-    "path": "/patients",
-    "component": "/Users/heiho/Development/DITA/fe-admin/pages/patients/index.vue",
-    "chunkName": "pages/patients/index"
+    "chunkName": "pages/bills",
+    "_name": "_5728c350"
   },
   {
     "name": "recapitulations",
     "path": "/recapitulations",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/recapitulations.vue",
-    "chunkName": "pages/recapitulations"
+    "chunkName": "pages/recapitulations",
+    "_name": "_62a8742b"
   },
   {
     "name": "reservations",
     "path": "/reservations",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/reservations.vue",
-    "chunkName": "pages/reservations"
+    "chunkName": "pages/reservations",
+    "_name": "_01483e4b"
   },
   {
     "name": "account-forgot-password",
     "path": "/account/forgot-password",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/account/forgot-password.vue",
-    "chunkName": "pages/account/forgot-password"
+    "chunkName": "pages/account/forgot-password",
+    "_name": "_6e80c6af"
   },
   {
     "name": "account-login",
     "path": "/account/login",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/account/login.vue",
-    "chunkName": "pages/account/login"
+    "chunkName": "pages/account/login",
+    "_name": "_3e476093"
   },
   {
     "name": "account-profile",
     "path": "/account/profile",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/account/profile/index.vue",
-    "chunkName": "pages/account/profile/index"
+    "chunkName": "pages/account/profile/index",
+    "_name": "_8a5ccad4"
   },
   {
     "name": "account-register",
     "path": "/account/register",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/account/register.vue",
-    "chunkName": "pages/account/register"
+    "chunkName": "pages/account/register",
+    "_name": "_32908b69"
   },
   {
     "name": "auth-forgot-password",
     "path": "/auth/forgot-password",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/auth/forgot-password/index.vue",
-    "chunkName": "pages/auth/forgot-password/index"
+    "chunkName": "pages/auth/forgot-password/index",
+    "_name": "_38b8f145"
   },
   {
     "name": "auth-lock-screen",
     "path": "/auth/lock-screen",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/auth/lock-screen.vue",
-    "chunkName": "pages/auth/lock-screen"
+    "chunkName": "pages/auth/lock-screen",
+    "_name": "_4cbb60ea"
   },
   {
     "name": "auth-login-1",
     "path": "/auth/login-1",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/auth/login-1.vue",
-    "chunkName": "pages/auth/login-1"
+    "chunkName": "pages/auth/login-1",
+    "_name": "_ab3ffbec"
   },
   {
     "name": "auth-recoverpwd",
     "path": "/auth/recoverpwd",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/auth/recoverpwd.vue",
-    "chunkName": "pages/auth/recoverpwd"
+    "chunkName": "pages/auth/recoverpwd",
+    "_name": "_28b0ec2c"
   },
   {
     "name": "auth-register-1",
     "path": "/auth/register-1",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/auth/register-1.vue",
-    "chunkName": "pages/auth/register-1"
+    "chunkName": "pages/auth/register-1",
+    "_name": "_3f89615a"
   },
   {
     "name": "auth-signin",
     "path": "/auth/signin",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/auth/signin/index.vue",
-    "chunkName": "pages/auth/signin/index"
+    "chunkName": "pages/auth/signin/index",
+    "_name": "_33f3a438"
   },
   {
     "name": "auth-signup",
     "path": "/auth/signup",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/auth/signup/index.vue",
-    "chunkName": "pages/auth/signup/index"
+    "chunkName": "pages/auth/signup/index",
+    "_name": "_8bde6ba4"
   },
   {
     "name": "auth-verification",
     "path": "/auth/verification",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/auth/verification/index.vue",
-    "chunkName": "pages/auth/verification/index"
+    "chunkName": "pages/auth/verification/index",
+    "_name": "_3821df31"
+  },
+  {
+    "name": "management-doctors",
+    "path": "/management/doctors",
+    "component": "/Users/heiho/Development/DITA/fe-admin/pages/management/doctors/index.vue",
+    "chunkName": "pages/management/doctors/index",
+    "_name": "_fcc9ace2"
+  },
+  {
+    "name": "management-patients",
+    "path": "/management/patients",
+    "component": "/Users/heiho/Development/DITA/fe-admin/pages/management/patients/index.vue",
+    "chunkName": "pages/management/patients/index",
+    "_name": "_24c58b69"
   },
   {
     "name": "utility-404",
     "path": "/utility/404",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/utility/404.vue",
-    "chunkName": "pages/utility/404"
+    "chunkName": "pages/utility/404",
+    "_name": "_0d56a0be"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/heiho/Development/DITA/fe-admin/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_36d336de"
   },
   {
     "path": "/",
-    "component": "~/pages/index.vue"
+    "component": "~/pages/index.vue",
+    "_name": "_2563ddd0"
+  },
+  {
+    "path": "/",
+    "component": "~/pages/index.vue",
+    "_name": "_2563ddd0"
   }
 ]

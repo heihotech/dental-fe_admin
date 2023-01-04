@@ -7,7 +7,7 @@ export default {
   },
   data() {
     return {
-      title: "Reservasi",
+      title: "Dokter",
     };
   },
 };
@@ -18,7 +18,7 @@ export default {
     <PageHeader :title="title" />
 
     <div class="row">
-      <book-order-table />
+      <doctor-table />
     </div>
   </div>
 </template>

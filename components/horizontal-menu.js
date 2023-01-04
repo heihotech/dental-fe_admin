@@ -10,7 +10,7 @@ export const menuItems = [
     id: uuidv4(),
     label: "Pasien",
     icon: "uil-bed",
-    link: "/patients",
+    link: "/management/patients",
   },
   {
     id: uuidv4(),
@@ -29,5 +29,17 @@ export const menuItems = [
     label: "Rekapitulasi",
     icon: "uil-chart-pie-alt",
     link: "/recapitulations",
+  },
+  {
+    id: uuidv4(),
+    label: "Dokter",
+    icon: "uil-bed",
+    link: "/management/doctors",
+  },
+  {
+    id: uuidv4(),
+    label: "Klinik",
+    icon: "uil-bed",
+    link: "/management/clinics",
   },
 ];

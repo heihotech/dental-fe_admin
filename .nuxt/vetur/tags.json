@@ -29,9 +29,6 @@
   "Menu": {
     "description": "Auto imported from components/menu.js"
   },
-  "PatientTable": {
-    "description": "Auto imported from components/tables/patient-table.vue"
-  },
   "Activity": {
     "description": "Auto imported from components/widgets/Activity.vue"
   },
@@ -50,6 +47,36 @@
   "TopUsers": {
     "description": "Auto imported from components/widgets/Top-users.vue"
   },
+  "BookOrderTable": {
+    "description": "Auto imported from components/tables/book-order-table.vue"
+  },
+  "DoctorTable": {
+    "description": "Auto imported from components/tables/doctor-table.vue"
+  },
+  "PatientTable": {
+    "description": "Auto imported from components/tables/patient-table.vue"
+  },
+  "CreateBookOrdersModal": {
+    "description": "Auto imported from components/modals/book-orders/Create-book-orders-modal.vue"
+  },
+  "DeleteBookOrdersModal": {
+    "description": "Auto imported from components/modals/book-orders/Delete-book-orders-modal.vue"
+  },
+  "DetailBookOrdersModal": {
+    "description": "Auto imported from components/modals/book-orders/Detail-book-orders-modal.vue"
+  },
+  "EditBookOrdersModal": {
+    "description": "Auto imported from components/modals/book-orders/Edit-book-orders-modal.vue"
+  },
+  "EvaluateBookOrdersModal": {
+    "description": "Auto imported from components/modals/book-orders/Evaluate-book-orders-modal.vue"
+  },
+  "RestoreBookOrdersModal": {
+    "description": "Auto imported from components/modals/book-orders/Restore-book-orders-modal.vue"
+  },
+  "ValidateBookOrdersModal": {
+    "description": "Auto imported from components/modals/book-orders/Validate-book-orders-modal.vue"
+  },
   "CreatePatientsModal": {
     "description": "Auto imported from components/modals/patients/Create-patients-modal.vue"
   },
@@ -64,5 +91,20 @@
   },
   "RestorePatientsModal": {
     "description": "Auto imported from components/modals/patients/Restore-patients-modal.vue"
+  },
+  "CreateDoctorsModal": {
+    "description": "Auto imported from components/modals/doctors/Create-doctors-modal.vue"
+  },
+  "DeleteDoctorsModal": {
+    "description": "Auto imported from components/modals/doctors/Delete-doctors-modal.vue"
+  },
+  "DetailDoctorsModal": {
+    "description": "Auto imported from components/modals/doctors/Detail-doctors-modal.vue"
+  },
+  "EditDoctorsModal": {
+    "description": "Auto imported from components/modals/doctors/Edit-doctors-modal.vue"
+  },
+  "RestoreDoctorsModal": {
+    "description": "Auto imported from components/modals/doctors/Restore-doctors-modal.vue"
   }
 }
