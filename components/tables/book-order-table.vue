@@ -20,13 +20,16 @@ export default {
       perPage: 10,
       pageOptions: [10, 25, 50, 100],
       filterFullName: null,
-      filterCode: null,
-      filterSpecialist: null,
+      filterState: null,
+      filterDoctor: null,
       filterIncludeDeleted: false,
       isBusy: false,
       sortBy: "arrival",
       sortDesc: true,
       fields: [],
+      //
+      selectedDoctor: null,
+      doctorsFetchedData: [],
       //
       isPublicRelation: false,
     };
@@ -41,6 +44,12 @@ export default {
         {
           label: "Nama",
           key: "fullName",
+          sortable: true,
+          // thStyle: { width: `25%` },
+        },
+        {
+          label: "No. Telepon",
+          key: "phoneNumber",
           sortable: true,
           // thStyle: { width: `25%` },
         },
@@ -115,14 +124,23 @@ export default {
         });
       },
     },
-    filterCode: {
+    filterState: {
       handler: function () {
         this.$fetch().catch((error) => {
           console.error(error);
         });
       },
     },
-    filterSpecialist: {
+    selectedDoctor: {
+      handler: function () {
+        if (this.selectedDoctor !== null) {
+          this.filterDoctor = this.selectedDoctor.value;
+        } else {
+          this.filterDoctor = null;
+        }
+      },
+    },
+    filterDoctor: {
       handler: function () {
         this.$fetch().catch((error) => {
           console.error(error);
@@ -155,6 +173,37 @@ export default {
         await this.$fetch();
       }
     },
+    async fetchDoctors(name) {
+      this.isBusy = true;
+
+      let url =
+        "/api/doctors?page=1&size=10&order=createdAt%3Adesc&withProfile=true";
+
+      if (name.length >= 3) {
+        url = url + "&fullName=" + name;
+      }
+
+      try {
+        const resp = await this.$axios.get(url);
+
+        if (resp.data) {
+          this.doctorsFetchedData = [];
+          if (resp.data.data.length > 0) {
+            resp.data.data.map((el) => {
+              this.doctorsFetchedData.push({
+                value: el.id,
+                name: `${
+                  el.user.profile.fullName ? el.user.profile.fullName + " " : ""
+                }`,
+                schedules: el.schedules,
+              });
+            });
+          }
+        }
+      } catch (error) {}
+
+      this.isBusy = false;
+    },
   },
   async fetch() {
     this.isBusy = true;
@@ -175,11 +224,24 @@ export default {
     if (this.filterFullName) {
       url = url + "&fullName=" + this.filterFullName;
     }
-    if (this.filterCode) {
-      url = url + "&code=" + this.filterCode;
+    if (this.filterState) {
+      switch (this.filterState) {
+        case "onlyNotValidated":
+          url = url + "&onlyNotValidated=true";
+          break;
+        case "onlyNotEvaluated":
+          url = url + "&onlyNotEvaluated=true";
+          break;
+        case "onlyEvaluated":
+          url = url + "&onlyEvaluated=true";
+          break;
+
+        default:
+          break;
+      }
     }
-    if (this.filterSpecialist) {
-      url = url + "&specialist=" + this.filterSpecialist;
+    if (this.filterDoctor) {
+      url = url + "&doctorId=" + this.filterDoctor;
     }
     if (this.filterIncludeDeleted === true) {
       url = url + "&includeDeleted=true";
@@ -303,27 +365,42 @@ export default {
           </div>
           <!-- col -->
           <div class="col-sm-12 col-md-3">
-            <b-form-group label="Kode" label-for="code" class="mb-2">
-              <b-form-input
-                v-model="filterCode"
-                debounce="500"
-                id="nik"
-                type="text"
-              ></b-form-input>
+            <b-form-group label="Status" label-for="state" class="mb-2">
+              <select class="form-select" v-model="filterState" required>
+                <option :value="null">Semua</option>
+                <option value="onlyNotValidated">Perlu Validasi</option>
+                <option value="onlyNotEvaluated">Siap Diperiksa</option>
+                <option value="onlyEvaluated">Selesai</option>
+              </select>
             </b-form-group>
             <!-- end col -->
           </div>
           <!-- col -->
           <div class="col-sm-12 col-md-3">
-            <b-form-group label="Spesialis" label-for="specialist" class="mb-2">
-              <b-form-input
-                v-model="filterSpecialist"
-                debounce="500"
-                id="specialist"
-                type="number"
-              ></b-form-input>
-            </b-form-group>
-            <!-- end col -->
+            <div class="mb-3">
+              <label for="village">Nama Dokter</label>
+              <multiselect
+                v-model="selectedDoctor"
+                id="ajax"
+                label="name"
+                track-by="name"
+                placeholder="Ketikkan nama"
+                open-direction="bottom"
+                :options="doctorsFetchedData"
+                :multiple="false"
+                :searchable="true"
+                :loading="isBusy"
+                :internal-search="false"
+                :clear-on-select="true"
+                :close-on-select="true"
+                :options-limit="300"
+                :limit="10"
+                :max-height="600"
+                :show-no-results="false"
+                :hide-selected="false"
+                @search-change="fetchDoctors"
+              ></multiselect>
+            </div>
           </div>
           <div class="col-sm-12 col-md-3">
             <b-form-group
@@ -366,7 +443,7 @@ export default {
                       mode: 'open',
                     })
                   "
-                  ><i class="uil uil-plus"></i> Buat Reservasi</b-button
+                  ><i class="uil uil-plus"></i> Buat Reservasi Offline</b-button
                 >
               </div>
             </div>
@@ -402,6 +479,24 @@ export default {
                   <div class="text-center text-secondary my-2">
                     <strong>Data tidak ditemukan</strong>
                   </div>
+                </template>
+                <template #cell(fullName)="data">
+                  <span v-if="data.item.patientId !== null">
+                    <a
+                      href="#"
+                      @click="
+                        toggleModal({
+                          modal: 'DetailBookOrder',
+                          isReFetch: false,
+                          id: parseInt(data.item.patientId),
+                          mode: 'open',
+                        })
+                      "
+                    >
+                      {{ data.item.patient.fullName }}
+                    </a>
+                  </span>
+                  <span v-else>{{ data.item.fullName }}</span>
                 </template>
                 <template #cell(status)="data">
                   <span
@@ -464,20 +559,18 @@ export default {
                   <span v-else>-</span>
                 </template>
                 <template #cell(schedule)="data">
-                  <span v-if="data.item.arrival !== null">
-                    <!-- <a
-                      href="#"
-                      @click="
-                        toggleModal({
-                          modal: 'DetailBookOrder',
-                          isReFetch: false,
-                          id: parseInt(data.item.id),
-                          mode: 'open',
-                        })
-                      "
-                    > -->
+                  <span
+                    v-if="
+                      data.item.arrival !== null ||
+                      data.item.arrivalPlan !== null
+                    "
+                  >
                     {{
-                      $parsingDateTime(data.item.arrival) +
+                      $parsingDateTime(
+                        data.item.arrival
+                          ? data.item.arrival
+                          : data.item.arrivalPlan
+                      ) +
                       ", " +
                       data.item.schedule.time
                     }}
@@ -485,58 +578,12 @@ export default {
                   </span>
                   <span v-else>-</span>
                 </template>
-                <!-- <template #cell(fullName)="data">
-                  <span v-if="data.item.fullName !== null">
-                    <a
-                      href="#"
-                      @click="
-                        toggleModal({
-                          modal: 'DetailBookOrder',
-                          isReFetch: false,
-                          id: parseInt(data.item.id),
-                          mode: 'open',
-                        })
-                      "
-                    >
-                      {{ data.item.user.profile.fullName }}
-                    </a>
-                  </span>
-                  <span v-else>-</span>
-                </template>
-                <template #cell(address)="data">
-                  <span v-if="data.item.address">
-                    {{
-                      $parsingAddress(data.item.address).length > 0
-                        ? $parsingAddress(data.item.address)
-                        : "-"
-                    }}
-                  </span>
-                  <span v-else>-</span>
-                </template>
-                <template #cell(ageCalculated)="data">
-                  <span v-if="data.item.birthDate !== null">
-                    {{ $calculateAge(data.item.birthDate) }} Tahun
-                  </span>
-                  <span v-else>-</span>
-                </template>
-                <template #cell(nik)="data">
-                  <span v-if="data.item.nik !== null">
-                    {{ data.item.nik }}
-                  </span>
-                  <span v-else>-</span>
-                </template>
-                <template #cell(phoneNumber)="data">
-                  <span v-if="data.item.phoneNumber !== null">
-                    {{ data.item.phoneNumber }}
-                  </span>
-                  <span v-else>-</span>
-                </template> -->
                 <template #cell(id)="data">
                   <b-dropdown variant="primary" size="sm">
                     <template v-slot:button-content>
                       <i class="uil uil-bright"></i>
                     </template>
-                    <b-dropdown-item-button
+                    <!-- <b-dropdown-item-button
                       @click.native="
                         toggleModal({
                           modal: 'EditBookOrder',
@@ -545,9 +592,9 @@ export default {
                           mode: 'open',
                         })
                       "
-                      ><i class="uil uil-edit-alt"></i>
-                      Edit</b-dropdown-item-button
-                    >
+                      ><i class="uil uil-edit-alt"></i> Edit
+                      Reservasi</b-dropdown-item-button
+                    > -->
                     <b-dropdown-item-button
                       v-if="data.item.patientId === null"
                       @click.native="
@@ -558,8 +605,8 @@ export default {
                           mode: 'open',
                         })
                       "
-                      ><i class="uil uil-check"></i>
-                      Validasi</b-dropdown-item-button
+                      ><i class="uil uil-check"></i> Validasi
+                      Kedatangan</b-dropdown-item-button
                     >
                     <b-dropdown-item-button
                       v-if="
@@ -575,7 +622,28 @@ export default {
                         })
                       "
                       ><i class="uil uil-file-medical-alt"></i>
-                      Evaluasi</b-dropdown-item-button
+                      <span
+                        v-if="
+                          data.item.arrival !== null &&
+                          data.item.patientId !== null &&
+                          data.item.diagnose === null &&
+                          data.item.therapy === null &&
+                          data.item.cost === null
+                        "
+                      >
+                        Evaluasi
+                      </span>
+                      <span
+                        v-if="
+                          data.item.arrival !== null &&
+                          data.item.patientId !== null &&
+                          (data.item.diagnose !== null ||
+                            data.item.therapy !== null ||
+                            data.item.cost !== null)
+                        "
+                      >
+                        Edit Evaluasi
+                      </span></b-dropdown-item-button
                     >
                     <b-dropdown-item-button
                       v-if="data.item.deletedAt === null"

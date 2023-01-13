@@ -11,30 +11,19 @@ export default {
       isModalActive: true,
       isBusy: false,
       //
-      doctor: {
-        code: null,
-        specialist: null,
-        userId: null,
-        schedules: [],
-      },
-      user: {
-        username: null,
+      patient: {
+        phoneNumber: null,
         email: null,
-        phone: null,
-        profileId: null,
-      },
-      profile: {
         fullName: null,
         nik: null,
-        employeeId: null,
         gender: null,
         religion: null,
         birthDate: null,
         avatarUrl: null,
         isIndonesian: null,
         addressId: null,
+        bookOrders: [],
       },
-      //
       address: {
         location: null,
         villageId: null,
@@ -59,49 +48,29 @@ export default {
   async fetch() {
     this.isBusy = true;
     let url =
-      "/api/doctors/" +
+      "/api/patients/" +
       this.id +
-      "?includeDeleted=true&withProfile=true&withSchedules=true";
+      "?includeDeleted=true&withAddress=true&withRecords=true";
     try {
       const resp = await this.$axios.get(url);
 
       if (resp.data) {
-        // begin doctor
+        // begin patient
         if (resp?.data?.data) {
           for (const key in resp?.data?.data) {
             if (
               resp?.data?.data?.hasOwnProperty(key) &&
-              this.doctor.hasOwnProperty(key)
+              this.patient.hasOwnProperty(key)
             ) {
-              this.doctor[key] = resp.data.data[key];
+              this.patient[key] = resp.data.data[key];
             }
           }
         }
-        // end doctor
-        // begin user
-        if (resp?.data?.data?.user) {
-          for (const key in resp?.data?.data?.user) {
-            if (
-              resp?.data?.data?.user?.hasOwnProperty(key) &&
-              this.user.hasOwnProperty(key)
-            ) {
-              this.user[key] = resp.data.data.user[key];
-            }
-          }
+
+        if (this.patient.bookOrders.length > 0) {
+          this.patient.bookOrders = this.patient.bookOrders.reverse();
         }
-        // end user
-        // begin profile
-        if (resp?.data?.data?.user?.profile) {
-          for (const key in resp?.data?.data?.user?.profile) {
-            if (
-              resp?.data?.data?.user?.profile?.hasOwnProperty(key) &&
-              this.profile.hasOwnProperty(key)
-            ) {
-              this.profile[key] = resp.data.data.user.profile[key];
-            }
-          }
-        }
-        // end user
+        // end patient
         // begin address
         if (resp?.data?.data?.address) {
           for (const key in resp?.data?.data?.address) {
@@ -128,9 +97,10 @@ export default {
     <b-modal
       v-model="isModalActive"
       scrollable
-      title="Detail Dokter"
+      title="Detail Reservasi"
       title-class="font-18"
       hide-footer
+      size="lg"
       @close="resetModal"
       @hide="resetModal"
       @ok="handleOk"
@@ -142,45 +112,39 @@ export default {
             <tr>
               <th scope="row" style="width: 50%">Nama</th>
               <td style="width: 50%">
-                {{ profile.fullName ? profile.fullName : "-" }}
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Spesialisasi</th>
-              <td>
-                {{ doctor.specialist ? doctor.specialist : "-" }}
+                {{ patient.fullName ? patient.fullName : "-" }}
               </td>
             </tr>
             <tr>
               <th scope="row">No. Telepon</th>
               <td>
-                {{ user.phone ? user.phone : "-" }}
+                {{ patient.phoneNumber ? patient.phoneNumber : "-" }}
               </td>
             </tr>
             <tr>
               <th scope="row">NIK</th>
               <td>
-                {{ profile.nik ? profile.nik : "-" }}
+                {{ patient.nik ? patient.nik : "-" }}
               </td>
             </tr>
             <tr>
               <th scope="row">Jenis Kelamin</th>
               <td>
-                {{ profile.gender ? $getGenderText(profile.gender) : "-" }}
+                {{ patient.gender ? $getGenderText(patient.gender) : "-" }}
               </td>
             </tr>
             <tr>
               <th scope="row">Tanggal Lahir</th>
               <td>
-                {{ profile.birthDate ? profile.birthDate : "-" }}
+                {{ patient.birthDate ? patient.birthDate : "-" }}
               </td>
             </tr>
             <tr>
               <th scope="row">Usia</th>
               <td>
                 {{
-                  profile.birthDate
-                    ? `${$calculateAge(profile.birthDate)} Tahun`
+                  patient.birthDate
+                    ? `${$calculateAge(patient.birthDate)} Tahun`
                     : "-"
                 }}
               </td>
@@ -198,19 +162,47 @@ export default {
                 <span v-else>-</span>
               </td>
             </tr>
-            <tr>
-              <th scope="row">Jadwal</th>
-              <td>
-                <ul v-if="doctor.schedules.length > 0">
-                  <li v-for="el in doctor.schedules" :key="el.id">
-                    {{ $switchDay(el) }}, {{ el.time }}
-                  </li>
-                </ul>
-                <span v-else>-</span>
-              </td>
-            </tr>
           </tbody>
         </table>
+      </div>
+      <!-- end table -->
+      <!-- begin table -->
+      <div v-if="isBusy === false && patient.bookOrders.length > 0">
+        <div
+          class="table-responsive"
+          v-for="el in patient.bookOrders"
+          :key="el.arrival"
+        >
+          <table class="table table-striped mb-0">
+            <tbody>
+              <tr>
+                <th scope="row" style="text-align: center" colspan="2">
+                  {{
+                    $parsingDateTime(el.arrival ? el.arrival : el.arrivalPlan)
+                  }}
+                </th>
+              </tr>
+              <tr>
+                <th scope="row" style="width: 25%">DX</th>
+                <td style="width: 75%">
+                  {{ el.diagnose ? el.diagnose : "-" }}
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">TX</th>
+                <td>
+                  {{ el.therapy ? el.therapy : "-" }}
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Keluhan Pasien</th>
+                <td>
+                  {{ el.patientComplaint ? el.patientComplaint : "-" }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <!-- end table -->
     </b-modal>

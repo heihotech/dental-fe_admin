@@ -115,9 +115,6 @@ export const routerOptions = {
   }, {
     path: "/",
     component: _2563ddd0
-  }, {
-    path: "/",
-    component: _2563ddd0
   }],
 
   fallback: false

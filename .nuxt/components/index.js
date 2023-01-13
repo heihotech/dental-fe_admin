@@ -24,16 +24,16 @@ export { default as EditBookOrdersModal } from '../../components/modals/book-ord
 export { default as EvaluateBookOrdersModal } from '../../components/modals/book-orders/Evaluate-book-orders-modal.vue'
 export { default as RestoreBookOrdersModal } from '../../components/modals/book-orders/Restore-book-orders-modal.vue'
 export { default as ValidateBookOrdersModal } from '../../components/modals/book-orders/Validate-book-orders-modal.vue'
-export { default as CreatePatientsModal } from '../../components/modals/patients/Create-patients-modal.vue'
-export { default as DeletePatientsModal } from '../../components/modals/patients/Delete-patients-modal.vue'
-export { default as DetailPatientsModal } from '../../components/modals/patients/Detail-patients-modal.vue'
-export { default as EditPatientsModal } from '../../components/modals/patients/Edit-patients-modal.vue'
-export { default as RestorePatientsModal } from '../../components/modals/patients/Restore-patients-modal.vue'
 export { default as CreateDoctorsModal } from '../../components/modals/doctors/Create-doctors-modal.vue'
 export { default as DeleteDoctorsModal } from '../../components/modals/doctors/Delete-doctors-modal.vue'
 export { default as DetailDoctorsModal } from '../../components/modals/doctors/Detail-doctors-modal.vue'
 export { default as EditDoctorsModal } from '../../components/modals/doctors/Edit-doctors-modal.vue'
 export { default as RestoreDoctorsModal } from '../../components/modals/doctors/Restore-doctors-modal.vue'
+export { default as CreatePatientsModal } from '../../components/modals/patients/Create-patients-modal.vue'
+export { default as DeletePatientsModal } from '../../components/modals/patients/Delete-patients-modal.vue'
+export { default as DetailPatientsModal } from '../../components/modals/patients/Detail-patients-modal.vue'
+export { default as EditPatientsModal } from '../../components/modals/patients/Edit-patients-modal.vue'
+export { default as RestorePatientsModal } from '../../components/modals/patients/Restore-patients-modal.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

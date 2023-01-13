@@ -77,21 +77,6 @@
   "ValidateBookOrdersModal": {
     "description": "Auto imported from components/modals/book-orders/Validate-book-orders-modal.vue"
   },
-  "CreatePatientsModal": {
-    "description": "Auto imported from components/modals/patients/Create-patients-modal.vue"
-  },
-  "DeletePatientsModal": {
-    "description": "Auto imported from components/modals/patients/Delete-patients-modal.vue"
-  },
-  "DetailPatientsModal": {
-    "description": "Auto imported from components/modals/patients/Detail-patients-modal.vue"
-  },
-  "EditPatientsModal": {
-    "description": "Auto imported from components/modals/patients/Edit-patients-modal.vue"
-  },
-  "RestorePatientsModal": {
-    "description": "Auto imported from components/modals/patients/Restore-patients-modal.vue"
-  },
   "CreateDoctorsModal": {
     "description": "Auto imported from components/modals/doctors/Create-doctors-modal.vue"
   },
@@ -106,5 +91,20 @@
   },
   "RestoreDoctorsModal": {
     "description": "Auto imported from components/modals/doctors/Restore-doctors-modal.vue"
+  },
+  "CreatePatientsModal": {
+    "description": "Auto imported from components/modals/patients/Create-patients-modal.vue"
+  },
+  "DeletePatientsModal": {
+    "description": "Auto imported from components/modals/patients/Delete-patients-modal.vue"
+  },
+  "DetailPatientsModal": {
+    "description": "Auto imported from components/modals/patients/Detail-patients-modal.vue"
+  },
+  "EditPatientsModal": {
+    "description": "Auto imported from components/modals/patients/Edit-patients-modal.vue"
+  },
+  "RestorePatientsModal": {
+    "description": "Auto imported from components/modals/patients/Restore-patients-modal.vue"
   }
 }

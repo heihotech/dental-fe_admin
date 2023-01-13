@@ -3,10 +3,10 @@ import Multiselect from "vue-multiselect";
 export default {
   components: { Multiselect },
   props: {
-    id: {
-      required: true,
-      type: Number,
-    },
+    //     id: {
+    //       required: true,
+    //       type: Number,
+    //     },
   },
   data() {
     return {
@@ -19,7 +19,7 @@ export default {
         scheduleId: null,
         arrivalPlan: null,
         arrivalEstimation: null,
-        arrival: null,
+        arrival: new Date(),
         patientComplaint: null,
         diagnose: null,
         therapy: null,
@@ -27,9 +27,6 @@ export default {
         fullName: null,
         phoneNumber: null,
         complaint: null,
-        doctor: null,
-        patient: null,
-        schedule: null,
       },
       //
       dismissSecs: 5,
@@ -37,8 +34,14 @@ export default {
       err: null,
       variant: "danger",
       //
+      selectedDoctor: null,
+      doctorsFetchedData: [],
+      //
       selectedPatient: null,
       patientsFetchedData: [],
+      //
+      selectedSchedule: null,
+      schedulesFetchedData: [],
       //
       roles: [],
     };
@@ -50,14 +53,10 @@ export default {
     },
     async submit() {
       this.isBusy = true;
-      const url = "/api/book-orders/" + parseInt(this.id);
-      delete this.bookOrder.patient;
-      delete this.bookOrder.doctor;
-      delete this.bookOrder.schedule;
-      this.bookOrder.arrival = new Date();
+      const url = "/api/book-orders/";
 
       try {
-        const resp = await this.$axios.patch(url, this.bookOrder);
+        const resp = await this.$axios.post(url, this.bookOrder);
 
         if (resp.data) {
           this.$emit("close");
@@ -74,6 +73,37 @@ export default {
         );
         console.log(error);
       }
+
+      this.isBusy = false;
+    },
+    async fetchDoctors(name) {
+      this.isBusy = true;
+
+      let url =
+        "/api/doctors?page=1&size=10&order=createdAt%3Adesc&withProfile=true&withSchedules=true";
+
+      if (name.length >= 3) {
+        url = url + "&fullName=" + name;
+      }
+
+      try {
+        const resp = await this.$axios.get(url);
+
+        if (resp.data) {
+          this.doctorsFetchedData = [];
+          if (resp.data.data.length > 0) {
+            resp.data.data.map((el) => {
+              this.doctorsFetchedData.push({
+                value: el.id,
+                name: `${
+                  el.user.profile.fullName ? el.user.profile.fullName + " " : ""
+                }`,
+                schedules: el.schedules,
+              });
+            });
+          }
+        }
+      } catch (error) {}
 
       this.isBusy = false;
     },
@@ -113,8 +143,33 @@ export default {
       this.variant = variant;
       this.dismissCountDown = this.dismissSecs;
     },
+    switchSchedule(arr) {
+      let schedules = [];
+      arr.map((s) => {
+        if (s.day === parseInt(new Date().getDay())) {
+          schedules.push({
+            value: s.id,
+            text: s.time,
+          });
+        }
+      });
+      return schedules;
+    },
   },
   watch: {
+    selectedDoctor: {
+      handler: function () {
+        this.schedulesFetchedData = [];
+        this.selectedSchedule = null;
+        this.bookOrder.doctorId = parseInt(this.selectedDoctor.value);
+        if (this.selectedDoctor !== null) {
+          // this.schedulesFetchedData = this.selectedDoctor.schedules;
+          this.schedulesFetchedData = this.switchSchedule(
+            this.selectedDoctor.schedules
+          );
+        }
+      },
+    },
     selectedPatient: {
       handler: function () {
         if (this.selectedPatient !== null) {
@@ -124,50 +179,28 @@ export default {
         }
       },
     },
+    selectedSchedule: {
+      handler: function () {
+        if (this.selectedSchedule !== null) {
+          this.bookOrder.scheduleId = parseInt(this.selectedSchedule.value);
+        }
+      },
+    },
   },
   computed: {
     isButtonSubmitDisable() {
-      if (this.isBusy === true) {
+      if (
+        this.isBusy === true ||
+        this.selectedSchedule === null ||
+        this.selectedDoctor === null ||
+        this.selectedPatient === null ||
+        this.bookOrder.patientComplaint === null
+      ) {
         return true;
       } else {
         return false;
       }
     },
-  },
-  async fetch() {
-    this.isBusy = true;
-    let url =
-      "/api/book-orders/" +
-      this.id +
-      "?withDoctor=true&withPatient=true&includeDeleted=true&withSchedule=true";
-    try {
-      const resp = await this.$axios.get(url);
-
-      if (resp.data) {
-        // begin bookOrder
-        if (resp.data.data) {
-          for (const key in resp.data.data) {
-            if (
-              resp.data.data.hasOwnProperty(key) &&
-              this.bookOrder.hasOwnProperty(key)
-            ) {
-              this.bookOrder[key] = resp.data.data[key];
-            }
-            if (key === "patientId" && resp.data.data.patient !== null) {
-              this.selectedPatient = {
-                value: this.bookOrder.patientId,
-                name: this.bookOrder.patient.fullName,
-                phoneNumber: this.bookOrder.patient.phoneNumber,
-              };
-            }
-          }
-        }
-        // end bookOrder
-      }
-    } catch (error) {}
-
-    console.log("fetched at: " + this.$fetchState.timestamp);
-    this.isBusy = false;
   },
   async created() {},
 };
@@ -178,7 +211,7 @@ export default {
     <b-modal
       v-model="isModalActive"
       scrollable
-      title="Pemeriksaan Pasien"
+      title="Edit Reservasi"
       title-class="font-18"
       size="md"
       @close="resetModal"
@@ -187,34 +220,91 @@ export default {
       <form @submit.prevent="submit" id="doctor-form">
         <div class="row">
           <div class="col-sm-12">
-            <!-- complaint -->
+            <!-- doctorId -->
             <div class="mb-3">
-              <label for="complaint">Keluhan Utama</label>
-              <b-textarea v-model="bookOrder.complaint" required></b-textarea>
+              <label for="village">Nama Dokter</label>
+              <multiselect
+                v-model="selectedDoctor"
+                id="ajax"
+                label="name"
+                track-by="name"
+                placeholder="Ketikkan nama"
+                open-direction="bottom"
+                :options="doctorsFetchedData"
+                :multiple="false"
+                :searchable="true"
+                :loading="isBusy"
+                :internal-search="false"
+                :clear-on-select="true"
+                :close-on-select="true"
+                :options-limit="300"
+                :limit="10"
+                :max-height="600"
+                :show-no-results="false"
+                :hide-selected="true"
+                @search-change="fetchDoctors"
+              ></multiselect>
             </div>
-            <!-- end complaint -->
-            <!-- diagnose -->
+            <!-- end doctorId -->
+            <!-- patientId -->
             <div class="mb-3">
-              <label for="diagnose">DX</label>
-              <b-textarea v-model="bookOrder.diagnose" required></b-textarea>
+              <label for="village">Nama Pasien</label>
+              <multiselect
+                v-model="selectedPatient"
+                id="ajax"
+                label="name"
+                track-by="name"
+                placeholder="Ketikkan nama"
+                open-direction="bottom"
+                :options="patientsFetchedData"
+                :multiple="false"
+                :searchable="true"
+                :loading="isBusy"
+                :internal-search="false"
+                :clear-on-select="true"
+                :close-on-select="true"
+                :options-limit="300"
+                :limit="10"
+                :max-height="600"
+                :show-no-results="false"
+                :hide-selected="true"
+                @search-change="fetchPatients"
+              ></multiselect>
             </div>
-            <!-- end diagnose -->
-            <!-- therapy -->
+            <!-- end patientId -->
+            <!-- patientId -->
             <div class="mb-3">
-              <label for="therapy">TX</label>
-              <b-textarea v-model="bookOrder.therapy" required></b-textarea>
+              <label for="village">Jadwal Praktek</label>
+              <multiselect
+                v-model="selectedSchedule"
+                open-direction="bottom"
+                :options="schedulesFetchedData"
+                label="text"
+                :multiple="false"
+                :searchable="false"
+                :loading="isBusy"
+                :internal-search="false"
+                :clear-on-select="true"
+                :close-on-select="true"
+                :options-limit="300"
+                :limit="10"
+                :max-height="600"
+                :show-no-results="false"
+                :hide-selected="true"
+              ></multiselect>
             </div>
-            <!-- end therapy -->
-            <!-- cost -->
+            <!-- end patientId -->
+            <!-- code -->
             <div class="mb-3">
-              <label for="cost">Biaya</label>
-              <b-input
-                v-model="bookOrder.cost"
-                type="number"
+              <label for="code">Keluhan</label>
+              <textarea
                 required
-              ></b-input>
+                v-model="bookOrder.patientComplaint"
+                type="text"
+                class="form-control"
+              />
             </div>
-            <!-- end cost -->
+            <!-- end code -->
           </div>
           <div class="col-12">
             <!-- alert -->

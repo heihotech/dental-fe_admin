@@ -18,28 +18,28 @@ export const menuItems = [
     icon: "uil-schedule",
     link: "/reservations",
   },
-  {
-    id: uuidv4(),
-    label: "Tarif",
-    icon: "uil-bill",
-    link: "/bills",
-  },
-  {
-    id: uuidv4(),
-    label: "Rekapitulasi",
-    icon: "uil-chart-pie-alt",
-    link: "/recapitulations",
-  },
+  // {
+  //   id: uuidv4(),
+  //   label: "Tarif",
+  //   icon: "uil-bill",
+  //   link: "/bills",
+  // },
+  // {
+  //   id: uuidv4(),
+  //   label: "Rekapitulasi",
+  //   icon: "uil-chart-pie-alt",
+  //   link: "/recapitulations",
+  // },
   {
     id: uuidv4(),
     label: "Dokter",
     icon: "uil-bed",
     link: "/management/doctors",
   },
-  {
-    id: uuidv4(),
-    label: "Klinik",
-    icon: "uil-bed",
-    link: "/management/clinics",
-  },
+  // {
+  //   id: uuidv4(),
+  //   label: "Klinik",
+  //   icon: "uil-bed",
+  //   link: "/management/clinics",
+  // },
 ];

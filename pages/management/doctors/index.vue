@@ -10,6 +10,7 @@ export default {
       title: "Dokter",
     };
   },
+  middleware: "authentication",
 };
 </script>
 

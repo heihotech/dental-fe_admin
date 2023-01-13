@@ -10,6 +10,7 @@ export default {
       title: "Reservasi",
     };
   },
+  middleware: "authentication",
 };
 </script>
 

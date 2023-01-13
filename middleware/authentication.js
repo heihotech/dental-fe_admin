@@ -43,3 +43,24 @@ export default function ({ store, route, redirect }) {
     redirect();
   }
 }
+
+// export default function ({ store, route, redirect }) {
+//   console.log(store.state.auth.currentUser);
+//   if (store.state.auth.currentUser === null) {
+//     return redirect("/auth/signin");
+//   }
+
+//   // if (route.meta[0].authority) {
+//   //   var found = false;
+
+//   //   route.meta[0].authority.map((el) =>
+//   //     store.state.auth.user.roles.some((role) =>
+//   //       el === role.name ? (found = true) : null
+//   //     )
+//   //   );
+
+//   //   if (!found) {
+//   //     redirect("/utility/404.vue");
+//   //   }
+//   // }
+// }

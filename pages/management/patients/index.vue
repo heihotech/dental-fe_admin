@@ -10,6 +10,7 @@ export default {
       title: "Pasien",
     };
   },
+  middleware: "authentication",
 };
 </script>
 
